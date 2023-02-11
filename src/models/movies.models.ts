@@ -33,6 +33,18 @@ class Moviemodel {
     }
   }
 
+  async getMany(): Promise<Movies[]> {
+    try {
+      const connection = await client.connect();
+      const sql = "SELECT * from movies";
+      const result = await connection.query(sql);
+      connection.release();
+      return result.rows;
+    } catch (error) {
+      throw new Error(`Error at retrieving movies ${(error as Error).message}`);
+    }
+  }
+
   async updateOne(u: Movies): Promise<Movies> {
     try {
       const connection = await client.connect();

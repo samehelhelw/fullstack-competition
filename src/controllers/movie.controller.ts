@@ -37,6 +37,23 @@ export const getOne = async (
   }
 };
 
+export const getMany = async (
+  _: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const users = await movieModel.getMany();
+    res.json({
+      status: "success",
+      data: users,
+      message: "Movies retrieved successfully",
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
 export const updateOne = async (
   req: Request,
   res: Response,

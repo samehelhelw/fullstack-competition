@@ -4,6 +4,7 @@ import * as controllers from "../../controllers/user.controllers";
 const routes = Router();
 
 routes.post("/", controllers.create);
+routes.get("/", controllers.getMany);
 routes
   .route("/:id")
   .get(controllers.getOne)

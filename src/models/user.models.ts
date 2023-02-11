@@ -31,6 +31,18 @@ class Usermodel {
     }
   }
 
+  async getMany(): Promise<User[]> {
+    try {
+      const connection = await client.connect();
+      const sql = "SELECT * from users";
+      const result = await connection.query(sql);
+      connection.release();
+      return result.rows;
+    } catch (error) {
+      throw new Error(`Error at retrieving users ${(error as Error).message}`);
+    }
+  }
+
   async updateOne(u: User): Promise<User> {
     try {
       const connection = await client.connect();
